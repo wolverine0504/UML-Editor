@@ -17,7 +17,7 @@ public class MainFrame extends JFrame {
 
         myFrame.setLayout(new BorderLayout());
         container.add(menuBar,BorderLayout.NORTH);
-        container.add(editorPanel,BorderLayout.EAST);
+        container.add(editorPanel);
         container.add(toolBar,BorderLayout.WEST);
 
         myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

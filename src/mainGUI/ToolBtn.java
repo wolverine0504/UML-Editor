@@ -1,17 +1,41 @@
 package mainGUI;
 
+import UMLmode.Mode;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class ToolBtn extends JButton {
+    Mode toolMode;
     ImageIcon icon;
-    public ToolBtn(String imgPath) {
-        icon=new ImageIcon(imgPath);
-        this.setIcon(icon);
+    EditorPanel editorPanel;
+    String createObject;
+
+    public ToolBtn( String imgPath, Mode toolMode, String createObject) {
+        this.icon=new ImageIcon(imgPath);
+        this.toolMode = toolMode;
+        this.createObject = createObject;
+        this.editorPanel = EditorPanel.getInstance();
+        this.addActionListener(new ToolBtnInnerListener());
+
+        setIcon(icon);
         setFocusable(false);
-        this.setBackground(Color.GRAY);
-        this.setOpaque(true);
+        setBackground(Color.GRAY);
+        setOpaque(true);
         setBorderPainted(false);
         setRolloverEnabled(true);
+    }
+
+    class ToolBtnInnerListener implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("Tool mode:"+toolMode+" Button Action Performed");
+            editorPanel.setCurrentMode(toolMode);
+            editorPanel.setCurrentShape(createObject);
+            editorPanel.refreshListener();
+        }
     }
 }
