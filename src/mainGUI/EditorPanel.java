@@ -1,6 +1,7 @@
 package mainGUI;
 
 import UMLObject.LineObject;
+import UMLObject.SelectionRectangle;
 import UMLObject.Shape;
 import UMLmode.Mode;
 
@@ -21,6 +22,10 @@ public class EditorPanel extends JPanel {
     private Vector<Shape> allObjectVector =new Vector<>();
     private Vector<LineObject> lineVector = new Vector();
     private Vector<Shape> selectedShapeVector = new Vector();
+    //選取方塊
+    private SelectionRectangle selectionRectangle = new SelectionRectangle();
+
+
 
     private EditorPanel() {
         setBackground(Color.WHITE);
@@ -53,9 +58,7 @@ public class EditorPanel extends JPanel {
         return selectedShape;
     }
 
-    public Vector<Shape> getAllObjectVector() {
-        return allObjectVector;
-    }
+    public Vector<Shape> getAllObjectVector() {return allObjectVector;}
 
     public Vector<LineObject> getLineVector() {
         return lineVector;
@@ -67,6 +70,58 @@ public class EditorPanel extends JPanel {
 
     public void addShape(Shape shape) {
         allObjectVector.add(shape);
+    }
+
+    public void addLineShape(LineObject line) {lineVector.add(line);}
+
+    public SelectionRectangle getSelectionRectangle() { return selectionRectangle;}
+
+    public void setSelectedShape(Shape selectedShape) {
+        if (this.selectedShape != null) {
+            (this.selectedShape).selectSwitch(false);
+        }
+        this.selectedShape = selectedShape;
+        if (this.selectedShape != null) {
+            (this.selectedShape).selectSwitch(true);
+        }
+        repaint();
+    }
+
+    public void setSelectedShapeFalse() {
+        if (selectedShape != null) {
+            this.selectedShape.selectSwitch(false);
+        }
+    }
+
+    // selection的mouseDragged中，消除上一次還存在在selectedShapeVector裡面objects的port
+    public void setSelectedShapeVectorFalse() {
+        if (selectedShapeVector.size() != 0) {
+            for (int i = 0; i < selectedShapeVector.size(); i++) {
+                this.selectedShapeVector.elementAt(i).selectSwitch(false);
+            }
+        }
+        repaint();
+    }
+
+    // selection的mouseDragged中，加入被框住object的ports
+    public void setSelectedShapeVectorTrue() {
+        if (selectedShapeVector.size() != 0) {
+            for (int i = 0; i < selectedShapeVector.size(); i++) {
+                this.selectedShapeVector.elementAt(i).selectSwitch(true);
+            }
+        }
+        repaint();
+    }
+
+    public void setAllObjectVectorTop(Shape selectedShape) {
+        for (int i = 0; i < allObjectVector.size(); i++) {
+            if (selectedShape.equals(allObjectVector.elementAt(i))) {
+                allObjectVector.remove(i);
+                allObjectVector.add(selectedShape);
+                return;
+            }
+        }
+        return;
     }
 
     public void refreshListener(){
@@ -96,7 +151,6 @@ public class EditorPanel extends JPanel {
         //drawPerfectRect(g2, rectPointInitX, rectPointInitY, rectPointEndX, rectPointEndY);
 
     }
-
 
 
 
