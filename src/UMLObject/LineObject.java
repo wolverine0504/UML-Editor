@@ -54,6 +54,6 @@ public class LineObject extends Shape{
 
     public void setLinePort(Port initPort, Port endPort) {
         ports[0]=initPort;
-        ports[1]=initPort;
+        ports[1]=endPort;
     }
 }

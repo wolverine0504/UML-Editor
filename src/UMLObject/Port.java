@@ -50,7 +50,7 @@ public class Port {
     public void resetAllLineLocationOfPort() {
         for (int i = 0; i < lineObjectVector.size(); i++) {
             LineObject line = lineObjectVector.elementAt(i);
-            System.out.println(line);
+            System.out.println("reset line object :"+line+" for Port: "+this);
             line.resetLineLocation();
         }
     }

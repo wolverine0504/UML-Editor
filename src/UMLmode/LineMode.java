@@ -47,6 +47,7 @@ public class LineMode extends Mode{
             this.endPort.addLine(line);
             line.setLinePort(initPort, endPort);
             editorPanel.addLineShape(line);
+            //沒有delete 新的line直接覆蓋
         }
         else{
             //清空initial Point、Port
@@ -69,10 +70,9 @@ public class LineMode extends Mode{
         //iterate through every shape
         for (int i = 0; i < editorPanel.getAllObjectVector().size(); i++) {
             Shape object = editorPanel.getAllObjectVector().elementAt(i);
-            System.out.println(object);
             Port[] allObjectPorts = object.getPorts();
             if(allObjectPorts.length!=0){
-                System.out.println("each ports of "+object.toString());
+                System.out.println("each ports of "+((BasicObject)object).getObjectName());
                 //iterate through every
                 for (int j = 0; j < allObjectPorts.length; j++) {
                     int objectPortX=allObjectPorts[j].getPortX();

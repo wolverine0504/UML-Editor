@@ -1,5 +1,6 @@
 package UMLmode;
 
+import UMLObject.BasicObject;
 import UMLObject.SelectionRectangle;
 import UMLObject.Shape;
 
@@ -91,7 +92,7 @@ public class SelectMode extends Mode{
         System.out.println("All objects:=========================");
         //從最上面的開始找
         for (int i = allShapeVector.size()-1 ; i >= 0; i--) {
-            System.out.println(allShapeVector.elementAt(i));
+            System.out.println(((BasicObject)allShapeVector.elementAt(i)).getObjectName());
             int objectX=allShapeVector.elementAt(i).getInitialPoint().x;
             int objectY=allShapeVector.elementAt(i).getInitialPoint().y;
             int objectHeight=allShapeVector.elementAt(i).getHeight();
@@ -116,7 +117,7 @@ public class SelectMode extends Mode{
         System.out.println("All objects:=========================");
         //從最上面的開始找
         for (int i = 0 ; i < allShapeVector.size(); i++) {
-            System.out.println(allShapeVector.elementAt(i));
+            System.out.println(((BasicObject)allShapeVector.elementAt(i)).getObjectName());
             int objectX=allShapeVector.elementAt(i).getInitialPoint().x;
             int objectY=allShapeVector.elementAt(i).getInitialPoint().y;
             int objectHeight=allShapeVector.elementAt(i).getHeight();

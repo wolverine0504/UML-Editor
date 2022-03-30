@@ -35,6 +35,15 @@ public class BasicObject extends Shape{
         }
     }
 
+    public void renameObject(String newName){
+        this.objectName=newName;
+        editorPanel.repaint();
+    }
+
+    public String getObjectName() {
+        return objectName;
+    }
+
     @Override
     public void draw(Graphics g) {
 

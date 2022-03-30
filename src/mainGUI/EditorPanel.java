@@ -126,6 +126,8 @@ public class EditorPanel extends JPanel {
 
     public void refreshListener(){
         System.out.println("refresh editorPanel Listener");
+        setSelectedShapeFalse();
+        setSelectedShapeVectorFalse();
         removeMouseListener((MouseListener) currentListener);
         removeMouseMotionListener((MouseMotionListener) currentListener);
         currentListener = currentMode;
@@ -147,8 +149,8 @@ public class EditorPanel extends JPanel {
             line.draw(g2);
         }
 
-        //g2.setPaint(new Color(155, 200, 123, alpha));
-        //drawPerfectRect(g2, rectPointInitX, rectPointInitY, rectPointEndX, rectPointEndY);
+        g2.setPaint(new Color(155, 200, 123,selectionRectangle.getRectangleAlpha()));
+        selectionRectangle.drawPerfectRect(g2);
 
     }
 
