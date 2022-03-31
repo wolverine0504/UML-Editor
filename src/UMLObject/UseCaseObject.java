@@ -19,7 +19,7 @@ public class UseCaseObject extends BasicObject{
         int textLocY = (int) this.objectLeftY + (int) height / 2;
 
         g2.setPaint(Color.BLACK);
-        g2.draw(new Ellipse2D.Double(objectLeftX, objectLeftY, width, height));
+        g2.draw(new Ellipse2D.Double(objectLeftX, objectLeftY,width, height));
         g2.drawString(objectName, textLocX, textLocY);
 
         if (isSelected == true) {

@@ -12,10 +12,10 @@ public class MenuBar extends JMenuBar {
     JMenuItem ungroupItem = new JMenuItem("Ungroup");
     JMenuItem groupItem = new JMenuItem("Group");
     RenameDialog renameDialog;
-    EditorPanel editorPanelPanel;
+    EditorPanel editorPanel;
 
     public MenuBar() {
-        editorPanelPanel=EditorPanel.getInstance();
+        editorPanel=EditorPanel.getInstance();
         editMenu.add(renameItem);
         editMenu.add(ungroupItem);
         editMenu.add(groupItem);
@@ -23,7 +23,7 @@ public class MenuBar extends JMenuBar {
         this.add(fileMenu);
         renameItem.addActionListener(new ReNameListner());
         groupItem.addActionListener(new GroupListener());
-        ungroupItem.addActionListener(new GroupListener());
+        ungroupItem.addActionListener(new UnGroupListener());
     }
 
     class ReNameListner implements ActionListener {
@@ -35,19 +35,21 @@ public class MenuBar extends JMenuBar {
         }
     }
 
-    class UnGroupListener implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-
-        }
-    }
-
     class GroupListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            editorPanel.group();
         }
     }
+
+    class UnGroupListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            editorPanel.ungroup();
+        }
+    }
+
+
 }

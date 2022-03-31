@@ -1,5 +1,6 @@
 package mainGUI;
 
+import UMLObject.Group;
 import UMLObject.LineObject;
 import UMLObject.SelectionRectangle;
 import UMLObject.Shape;
@@ -124,6 +125,34 @@ public class EditorPanel extends JPanel {
         return;
     }
 
+    public void group(){
+        Group group = new Group();
+        group.addSelectedShapeToGroup(selectedShapeVector);
+        clearOriginalShape();
+        allObjectVector.add(group);
+        group.getInitialPoint();
+        group.selectSwitch(true);
+        repaint();
+    }
+
+
+    public void clearOriginalShape(){
+        setSelectedShapeVectorFalse();
+        for (int i = 0; i < selectedShapeVector.size(); i++) {
+            allObjectVector.removeElement(selectedShapeVector.elementAt(i));
+        }
+        this.selectedShapeVector.removeAllElements();
+    }
+
+
+    public void ungroup(){
+        Vector<Shape> originalSelectedShapeGroupVector = ((Group)selectedShape).getOriginalSelectedShapeGroupVector();
+        allObjectVector.removeElement(selectedShape);
+        for (int i = 0; i < originalSelectedShapeGroupVector.size(); i++) {
+            allObjectVector.add(originalSelectedShapeGroupVector.elementAt(i));
+        }
+    }
+
     public void refreshListener(){
         System.out.println("refresh editorPanel Listener");
         setSelectedShapeFalse();
@@ -136,6 +165,9 @@ public class EditorPanel extends JPanel {
     }
 
     public void paintComponent(Graphics g){
+
+        System.out.println("Panel repaint");
+
         super.paintComponent(g);
         Graphics2D g2 =(Graphics2D) g;
 

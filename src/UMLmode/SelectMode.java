@@ -92,14 +92,14 @@ public class SelectMode extends Mode{
         System.out.println("All objects:=========================");
         //從最上面的開始找
         for (int i = allShapeVector.size()-1 ; i >= 0; i--) {
-            System.out.println(((BasicObject)allShapeVector.elementAt(i)).getObjectName());
+            //System.out.println(((BasicObject)allShapeVector.elementAt(i)).getObjectName());
             int objectX=allShapeVector.elementAt(i).getInitialPoint().x;
             int objectY=allShapeVector.elementAt(i).getInitialPoint().y;
             int objectHeight=allShapeVector.elementAt(i).getHeight();
             int objectWidth=allShapeVector.elementAt(i).getWidth();
             int x=mouseLocation.x;
             int y=mouseLocation.y;
-
+            System.out.println("Object location: ("+objectX+","+objectY+"),height:"+objectHeight+", width:"+objectWidth);
             if(x>=objectX && x<=(objectX+objectWidth) && y>=objectY && y<=(objectY+objectHeight)){
                 System.out.println("click is in a Shape !!");
                 editorPanel.setSelectedShape(allShapeVector.elementAt(i));
@@ -117,11 +117,13 @@ public class SelectMode extends Mode{
         System.out.println("All objects:=========================");
         //從最上面的開始找
         for (int i = 0 ; i < allShapeVector.size(); i++) {
-            System.out.println(((BasicObject)allShapeVector.elementAt(i)).getObjectName());
+            //System.out.println(((BasicObject)allShapeVector.elementAt(i)).getObjectName());
             int objectX=allShapeVector.elementAt(i).getInitialPoint().x;
             int objectY=allShapeVector.elementAt(i).getInitialPoint().y;
             int objectHeight=allShapeVector.elementAt(i).getHeight();
             int objectWidth=allShapeVector.elementAt(i).getWidth();
+
+            System.out.println("Object location: ("+objectX+","+objectY+"),height:"+objectHeight+", width:"+objectWidth);
 
             if(objectX>=px && (objectX+objectWidth)<=px+pw && objectY>=py && objectY+objectHeight<=py+ph){
                 System.out.println("Shape is in the selectionRect !!");

@@ -72,7 +72,7 @@ public class LineMode extends Mode{
             Shape object = editorPanel.getAllObjectVector().elementAt(i);
             Port[] allObjectPorts = object.getPorts();
             if(allObjectPorts.length!=0){
-                System.out.println("each ports of "+((BasicObject)object).getObjectName());
+                //System.out.println("each ports of "+((BasicObject)object).getObjectName());
                 //iterate through every
                 for (int j = 0; j < allObjectPorts.length; j++) {
                     int objectPortX=allObjectPorts[j].getPortX();

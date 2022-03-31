@@ -16,7 +16,7 @@ public abstract class Shape {
     public abstract void resetObjectLocation(int deltaX,int deltaY);
     public abstract void resetLineLocation();
     public abstract void draw(Graphics g);
-    public abstract void selectSwitch(Boolean chosen);
+    public abstract void selectSwitch(Boolean choice);
 
 
 }
