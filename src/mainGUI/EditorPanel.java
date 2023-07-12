@@ -16,17 +16,15 @@ import java.util.Vector;
 public class EditorPanel extends JPanel {
 
     private static EditorPanel uniqueInstance;
-    private EventListener currentListener=null;
+    private EventListener currentListener = null;
     private Mode currentMode;
     private String currentShape;
     private Shape selectedShape = null;
-    private Vector<Shape> allObjectVector =new Vector<>();
+    private Vector<Shape> allObjectVector = new Vector<>();
     private Vector<LineObject> lineVector = new Vector();
     private Vector<Shape> selectedShapeVector = new Vector();
-    //選取方塊
+    // 選取方塊
     private SelectionRectangle selectionRectangle = new SelectionRectangle();
-
-
 
     private EditorPanel() {
         setBackground(Color.WHITE);
@@ -59,7 +57,9 @@ public class EditorPanel extends JPanel {
         return selectedShape;
     }
 
-    public Vector<Shape> getAllObjectVector() {return allObjectVector;}
+    public Vector<Shape> getAllObjectVector() {
+        return allObjectVector;
+    }
 
     public Vector<LineObject> getLineVector() {
         return lineVector;
@@ -73,9 +73,13 @@ public class EditorPanel extends JPanel {
         allObjectVector.add(shape);
     }
 
-    public void addLineShape(LineObject line) {lineVector.add(line);}
+    public void addLineShape(LineObject line) {
+        lineVector.add(line);
+    }
 
-    public SelectionRectangle getSelectionRectangle() { return selectionRectangle;}
+    public SelectionRectangle getSelectionRectangle() {
+        return selectionRectangle;
+    }
 
     public void setSelectedShape(Shape selectedShape) {
         if (this.selectedShape != null) {
@@ -125,7 +129,7 @@ public class EditorPanel extends JPanel {
         return;
     }
 
-    public void group(){
+    public void group() {
         Group group = new Group();
         group.addSelectedShapeToGroup(selectedShapeVector);
         clearOriginalShape();
@@ -134,9 +138,9 @@ public class EditorPanel extends JPanel {
         group.selectSwitch(true);
         repaint();
     }
-
-
-    public void clearOriginalShape(){
+    //清除allObjectVector中原先被選擇的Shape
+    //再把selectedShapeVector整個清掉因為已經是Group object了
+    public void clearOriginalShape() {
         setSelectedShapeVectorFalse();
         for (int i = 0; i < selectedShapeVector.size(); i++) {
             allObjectVector.removeElement(selectedShapeVector.elementAt(i));
@@ -144,16 +148,15 @@ public class EditorPanel extends JPanel {
         this.selectedShapeVector.removeAllElements();
     }
 
-
-    public void ungroup(){
-        Vector<Shape> originalSelectedShapeGroupVector = ((Group)selectedShape).getOriginalSelectedShapeGroupVector();
+    public void ungroup() {
+        Vector<Shape> originalSelectedShapeGroupVector = ((Group) selectedShape).getOriginalSelectedShapeGroupVector();
         allObjectVector.removeElement(selectedShape);
         for (int i = 0; i < originalSelectedShapeGroupVector.size(); i++) {
             allObjectVector.add(originalSelectedShapeGroupVector.elementAt(i));
         }
     }
 
-    public void refreshListener(){
+    public void refreshListener() {
         System.out.println("refresh editorPanel Listener");
         setSelectedShapeFalse();
         setSelectedShapeVectorFalse();
@@ -164,15 +167,15 @@ public class EditorPanel extends JPanel {
         addMouseMotionListener((MouseMotionListener) currentListener);
     }
 
-    public void paintComponent(Graphics g){
+    public void paintComponent(Graphics g) {
 
         System.out.println("Panel repaint");
 
         super.paintComponent(g);
-        Graphics2D g2 =(Graphics2D) g;
+        Graphics2D g2 = (Graphics2D) g;
 
         for (int i = 0; i < allObjectVector.size(); i++) {
-            Shape object=allObjectVector.elementAt(i);
+            Shape object = allObjectVector.elementAt(i);
             object.draw(g2);
         }
 
@@ -181,11 +184,9 @@ public class EditorPanel extends JPanel {
             line.draw(g2);
         }
 
-        g2.setPaint(new Color(155, 200, 123,selectionRectangle.getRectangleAlpha()));
+        g2.setPaint(new Color(155, 200, 123, selectionRectangle.getRectangleAlpha()));
         selectionRectangle.drawPerfectRect(g2);
 
     }
-
-
 
 }

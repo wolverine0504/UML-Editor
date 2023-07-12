@@ -4,7 +4,7 @@ import UMLObject.*;
 
 import java.awt.*;
 
-public class LineObjectGenerator extends ShapeGenerator{
+public class LineObjectGenerator extends ShapeGenerator {
 
     private String lineObjectType;
     private Point mouseStartPoint;
@@ -19,13 +19,11 @@ public class LineObjectGenerator extends ShapeGenerator{
     @Override
     public LineObject getLineObjectShape() {
         if (lineObjectType.equals("associateLine")) {
-            return new AssociateLine(mouseStartPoint,mouseEndPoint);
-        }
-        else if (lineObjectType.equals("generalLine")) {
-            return new GeneralLine(mouseStartPoint,mouseEndPoint);
-        }
-        else if (lineObjectType.equals("compositeLine")){
-            return new CompositeLine(mouseStartPoint,mouseEndPoint);
+            return new AssociateLine(mouseStartPoint, mouseEndPoint);
+        } else if (lineObjectType.equals("generalLine")) {
+            return new GeneralLine(mouseStartPoint, mouseEndPoint);
+        } else if (lineObjectType.equals("compositeLine")) {
+            return new CompositeLine(mouseStartPoint, mouseEndPoint);
         }
         return null;
     }

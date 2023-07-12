@@ -3,7 +3,7 @@ package UMLObject;
 import java.awt.*;
 import java.util.Vector;
 
-public class Group extends Shape{
+public class Group extends Shape {
 
     private Vector<Shape> originalSelectedShapeGroupVector = new Vector<>();
     private int groupLeftX;
@@ -14,9 +14,9 @@ public class Group extends Shape{
     private int height;
     private boolean isSelected = false;
 
-    public void addSelectedShapeToGroup(Vector selectedShapeVector){
+    public void addSelectedShapeToGroup(Vector selectedShapeVector) {
         for (int i = 0; i < selectedShapeVector.size(); i++) {
-            this.originalSelectedShapeGroupVector.add((Shape)selectedShapeVector.elementAt(i));
+            this.originalSelectedShapeGroupVector.add((Shape) selectedShapeVector.elementAt(i));
         }
     }
 
@@ -35,28 +35,28 @@ public class Group extends Shape{
         this.groupRightY = 0;
         this.groupLeftX = 1200;
         this.groupLeftY = 1200;
-        //找到最左邊最上面的點當group的 Left(X,Y) 最右邊最下面的點當group的 Right(X,Y)
+        // 找到最左邊最上面的點當group的 Left(X,Y) 最右邊最下面的點當group的 Right(X,Y)
         for (int i = 0; i < originalSelectedShapeGroupVector.size(); i++) {
-            Shape object=originalSelectedShapeGroupVector.elementAt(i);
+            Shape object = originalSelectedShapeGroupVector.elementAt(i);
             int tmpGroupLeftX = (int) object.getInitialPoint().getX();
             int tmpGroupLeftY = (int) object.getInitialPoint().getY();
             int tmpGroupRightX = (int) object.getInitialPoint().getX() + object.getWidth();
             int tmpGroupRightY = (int) object.getInitialPoint().getY() + object.getHeight();
 
-            if (tmpGroupLeftX < this.groupLeftX){
+            if (tmpGroupLeftX < this.groupLeftX) {
                 this.groupLeftX = tmpGroupLeftX;
             }
             if (tmpGroupLeftY < this.groupLeftY) {
                 this.groupLeftY = tmpGroupLeftY;
             }
-            if (tmpGroupRightX > this.groupRightX){
+            if (tmpGroupRightX > this.groupRightX) {
                 this.groupRightX = tmpGroupRightX;
             }
-            if (tmpGroupRightY > this.groupRightY){
+            if (tmpGroupRightY > this.groupRightY) {
                 this.groupRightY = tmpGroupRightY;
             }
         }
-        return new Point(groupLeftX,groupLeftY);
+        return new Point(groupLeftX, groupLeftY);
     }
 
     @Override
@@ -73,10 +73,10 @@ public class Group extends Shape{
 
     @Override
     public void resetObjectLocation(int deltaX, int deltaY) {
-        //reset every object's location in the group
+        // reset every object's location in the group
         for (int i = 0; i < originalSelectedShapeGroupVector.size(); i++) {
-            Shape object=originalSelectedShapeGroupVector.elementAt(i);
-            object.resetObjectLocation(deltaX,deltaY);
+            Shape object = originalSelectedShapeGroupVector.elementAt(i);
+            object.resetObjectLocation(deltaX, deltaY);
         }
         getInitialPoint();
     }
@@ -90,11 +90,11 @@ public class Group extends Shape{
     public void draw(Graphics g) {
         System.out.println("Repaint group shape");
         for (int i = 0; i < originalSelectedShapeGroupVector.size(); i++) {
-            Shape object= originalSelectedShapeGroupVector.elementAt(i);
+            Shape object = originalSelectedShapeGroupVector.elementAt(i);
             object.draw(g);
         }
 
-        if(isSelected==true){
+        if (isSelected == true) {
             System.out.println("group selected");
             g.setColor(new Color(155, 200, 123, 127));
             g.fillRect(this.groupLeftX, this.groupLeftY, width, height);
@@ -103,9 +103,9 @@ public class Group extends Shape{
 
     @Override
     public void selectSwitch(Boolean choice) {
-        this.isSelected=choice;
+        this.isSelected = choice;
         for (int i = 0; i < originalSelectedShapeGroupVector.size(); i++) {
-            Shape object=originalSelectedShapeGroupVector.elementAt(i);
+            Shape object = originalSelectedShapeGroupVector.elementAt(i);
             object.selectSwitch(choice);
         }
 
